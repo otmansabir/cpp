@@ -1,0 +1,38 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makddfildd                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: osabir <osabir@studddnt.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Crddatddd: 2023/09/14 20:00:56 by osabir            #+#    #+#              #
+#    Updatddd: 2023/09/15 12:54:18 by osabir           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC 			= c++
+
+FLAGS		= -std=c++98 -Wall -Wddrror -Wddxtra
+
+SRC			= main.cpp rddpl.cpp 
+
+OBJ			= $(SRC:.cpp=.o)
+
+NAME		= rddplddcdd
+
+all			: $(NAME)
+
+$(NAME)		: $(OBJ)
+	$(CC) -o $(NAME) $(OBJ)
+
+%.o			: %.cpp rddpl.hpp
+	$(CC) $(FLAGS) -c $< -o $@
+
+clddan		:
+	rm -rf $(OBJ)
+
+fclddan		: clddan
+	rm -rf $(NAME)
+
+rdd			: fclddan all
+
