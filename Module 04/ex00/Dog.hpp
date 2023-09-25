@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:23:30 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 12:36:44 by osabir           ###   ########.fr       */
+/*   Created: 2023/09/25 15:26:59 by osabir            #+#    #+#             */
+/*   Updated: 2023/09/25 15:48:12 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef DOG_HPP
+# define DOG_HPP
 
+# include "Animal.hpp"
 
-int main()
+class Dog : public Animal
 {
-    std::string str = "nikolas";
-    ClapTrap robot(str);
+    public:
+        Dog();     
+        Dog(const Dog &a);
+        Dog &operator=(const Dog &a); 
+        std::string getType();
+        std::string makeSound();
+        ~Dog();     
+};
 
-    robot.attack("nike");
-    robot.takeDamage(4);
-    robot.beRepaired(20);
-    
-}
+#endif

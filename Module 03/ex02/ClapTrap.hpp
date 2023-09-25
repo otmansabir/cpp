@@ -6,7 +6,7 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:42:13 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 15:40:02 by osabir           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:24:40 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 class ClapTrap
 {
-	private:
-		std::string	Name;
+	protected:
+		std::string		Name;
 		unsigned int	HitPoint;
 		unsigned int	EnergyPoint;
 		unsigned int	AttackDamage;
@@ -32,6 +32,5 @@ class ClapTrap
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 };
-
 
 #endif

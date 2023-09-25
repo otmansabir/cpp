@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fragtrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:23:30 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 12:36:44 by osabir           ###   ########.fr       */
+/*   Created: 2023/09/25 14:16:36 by osabir            #+#    #+#             */
+/*   Updated: 2023/09/25 15:45:06 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
+# include "ClapTrap.hpp"
 
-int main()
+class FragTrap : public ClapTrap
 {
-    std::string str = "nikolas";
-    ClapTrap robot(str);
+    public:
+        FragTrap();
+        FragTrap(std::string &Name);
+        FragTrap(const FragTrap &a);
+        FragTrap &operator=(const FragTrap &a);
+        ~FragTrap();
+        void    highFivesGuys(void);
+        void    attack(const std::string& target);   
+};
 
-    robot.attack("nike");
-    robot.takeDamage(4);
-    robot.beRepaired(20);
-    
-}
+#endif

@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:23:30 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 12:36:44 by osabir           ###   ########.fr       */
+/*   Created: 2023/09/25 14:40:17 by osabir            #+#    #+#             */
+/*   Updated: 2023/09/25 14:44:12 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 
 
 int main()
 {
-    std::string str = "nikolas";
-    ClapTrap robot(str);
-
-    robot.attack("nike");
-    robot.takeDamage(4);
-    robot.beRepaired(20);
-    
+    std::string str = "Fragman";
+    FragTrap Frag(str);
+    Frag.attack("another man");
+    Frag.takeDamage(4);
+    Frag.beRepaired(8);
+    Frag.highFivesGuys();
+    return 0; 
 }

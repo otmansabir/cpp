@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:23:30 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 12:36:44 by osabir           ###   ########.fr       */
+/*   Created: 2023/09/25 16:19:01 by osabir            #+#    #+#             */
+/*   Updated: 2023/09/25 16:20:33 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
+#include <iostream>
 
-int main()
+class WrongAnimal
 {
-    std::string str = "nikolas";
-    ClapTrap robot(str);
+    protected:
+        std::string type;
+    public:
+        WrongAnimal();
+        WrongAnimal(const WrongAnimal &a);
+        WrongAnimal &operator=(const WrongAnimal &a);
+        ~WrongAnimal(); 
+};
 
-    robot.attack("nike");
-    robot.takeDamage(4);
-    robot.beRepaired(20);
-    
-}
+#endif

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:23:30 by osabir            #+#    #+#             */
-/*   Updated: 2023/09/25 12:36:44 by osabir           ###   ########.fr       */
+/*   Created: 2023/09/25 15:12:02 by osabir            #+#    #+#             */
+/*   Updated: 2023/09/25 16:07:37 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef CAT_HPP
+# define CAT_HPP
 
+# include "Animal.hpp"
 
-int main()
+class Cat : public Animal
 {
-    std::string str = "nikolas";
-    ClapTrap robot(str);
+    public:
+        Cat();     
+        Cat(const Cat &a);
+        Cat &operator=(const Cat &a); 
+        std::string getType(); 
+        std::string makeSound();
+        ~Cat();     
+};
 
-    robot.attack("nike");
-    robot.takeDamage(4);
-    robot.beRepaired(20);
-    
-}
+#endif
