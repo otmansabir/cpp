@@ -6,7 +6,7 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 08:12:53 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/12 17:59:58 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 10:49:16 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <sstream>
 # include <fstream>
 # include <map>
-#include <cstdlib> 
+# include <cstdlib> 
 # include <iomanip>
 
-class Bitcoin
+class BitcoinExchange
 {
     private:
         std::map<std::string , double>  Data;
@@ -28,16 +28,16 @@ class Bitcoin
         double                          Convert;
         bool                            lower;
     public:
-        Bitcoin();
-        Bitcoin(Bitcoin const &B);
-        Bitcoin &operator=(Bitcoin const &B);
-        ~Bitcoin();
-        
+        BitcoinExchange();
+        BitcoinExchange(BitcoinExchange const &B);
+        BitcoinExchange &operator=(BitcoinExchange const &B);
+        ~BitcoinExchange();
+   
         void Exchange(const std::string input);
         void ReadDataBaseFile();
         void ParsingInput(const std::string input);
-        void ParsingDate(std::string input);
-        void ParsingValue(std::string Value);
+        void ParsingDate(std::string input, const std::string original);
+        void ParsingValue(std::string input, const std::string original);
 };
 
 #endif

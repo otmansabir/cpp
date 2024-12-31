@@ -6,7 +6,7 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:34:58 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/10 17:38:40 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 09:51:56 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int ac, char **av)
 {
     try
     {
-        Merge Me;
+        PmergeMe Me;
         char **copy = av;
         if (ac < 2)
             return std::cerr << "Error" << std::endl, 1;

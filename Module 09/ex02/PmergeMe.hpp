@@ -6,7 +6,7 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:34:11 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/09 14:34:35 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 09:48:32 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <string>
 # include <vector>
 # include <deque>
-# include <utility>
-#include <cstdlib>
-# include <chrono>
+# include <cstdlib>
+# include <ctime>
+# include <climits>
 
-class Merge
+class PmergeMe
 {
     private:
         std::vector<long>                    Push_Swap;
@@ -43,10 +43,10 @@ class Merge
         bool                                lastDeque;
         
     public:
-        Merge();
-        Merge(Merge const &M);
-        Merge &operator=(Merge const &M);
-        ~Merge();
+        PmergeMe();
+        PmergeMe(PmergeMe const &M);
+        PmergeMe &operator=(PmergeMe const &M);
+        ~PmergeMe();
         
         void ParsingForVector(const std::string input);
         void possibilityToSortVector();

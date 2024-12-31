@@ -6,85 +6,85 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:35:00 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/10 11:09:00 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 13:03:38 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-Merge::Merge()
+PmergeMe::PmergeMe()
 {
 }
 
-Merge::Merge(Merge const &M)
+PmergeMe::PmergeMe(PmergeMe const &M)
 {
     *this = M;
 }
 
-Merge &Merge::operator=(Merge const &M)
+PmergeMe &PmergeMe::operator=(PmergeMe const &M)
 {
     (void)M;
     return *this;
 }
 
-Merge::~Merge()
+PmergeMe::~PmergeMe()
 {
 }
 
-void Merge::ParsingForVector(const std::string input)
+void PmergeMe::ParsingForVector(const std::string input)
 {
     Push_Swap.push_back(atolong(input));
 }
-void Merge::possibilityToSortVector()
+void PmergeMe::possibilityToSortVector()
 {
     if (Push_Swap.size() == 1)
         Main.push_back(Push_Swap[0]);
     else
         VectorSort();
 }
-void Merge::possibilityToSortDeque()
+void PmergeMe::possibilityToSortDeque()
 {
     if (dPush_Swap.size() == 1)
         dMain.push_back(dPush_Swap[0]);
     else
         DequeSort();
 }
-void Merge::ParsingForDeque(const std::string input)
+void PmergeMe::ParsingForDeque(const std::string input)
 {
     dPush_Swap.push_back(atolong(input));
 }
 
-long Merge::atolong(const std::string &str)
+long PmergeMe::atolong(const std::string &str)
 {
     size_t i = 0;
     bool entre = 0;
     if (str.length() == 0)
-        throw (Merge::thowing());
+        throw (PmergeMe::thowing());
     long number = 0;
     while (std::isdigit(str[i]))
     {
         number = number * 10 + (str[i] - '0');
         if (number > INT_MAX || number < 0)
-            throw (Merge::thowing());
+            throw (PmergeMe::thowing());
         i++;
         entre = 1;
     }
     if ((str[i] && !entre) || (str[i] && !std::isdigit(str[i])))
-        throw (Merge::thowing());
+        throw (PmergeMe::thowing());
     return number;
 }
 
-size_t Merge::GetVectorSize()
+size_t PmergeMe::GetVectorSize()
 {
     return this->Push_Swap.size();
 }
 
-size_t Merge::GetDequeSize()
+size_t PmergeMe::GetDequeSize()
 {
     return this->dPush_Swap.size();
 }
 
-void Merge::beforeSorting()
+void PmergeMe::beforeSorting()
 {
     std::cout << "Before: ";
     for (size_t i = 0; i < this->Push_Swap.size(); i++)
@@ -92,7 +92,7 @@ void Merge::beforeSorting()
     std::cout << std::endl;
 }
 
-void Merge::afterSorting()
+void PmergeMe::afterSorting()
 {
     std::cout << "After: ";
     for (size_t i = 0; i < this->Main.size(); i++)
@@ -101,7 +101,7 @@ void Merge::afterSorting()
         
 }
 
-size_t Merge::jacobsthalSequence(size_t n)
+size_t PmergeMe::jacobsthalSequence(size_t n)
 {
     if (n == 0)
         return 0;
@@ -112,7 +112,8 @@ size_t Merge::jacobsthalSequence(size_t n)
 
 void mergeSortPairs(std::vector<std::pair<long, long> >& arr, size_t left, size_t right)
 {
-    if (left + 1 >= right) return;
+    if (left + 1 >= right)
+        return;
     
     size_t mid = (left + right) / 2;
     mergeSortPairs(arr, left, mid);
@@ -121,7 +122,8 @@ void mergeSortPairs(std::vector<std::pair<long, long> >& arr, size_t left, size_
     std::vector<std::pair<long, long> > temp(right - left);
     size_t i = left, j = mid, k = 0;
     
-    while (i < mid && j < right) {
+    while (i < mid && j < right)
+    {
         if (arr[i].first <= arr[j].first)
             temp[k++] = arr[i++];
         else
@@ -139,7 +141,8 @@ void mergeSortPairs(std::vector<std::pair<long, long> >& arr, size_t left, size_
 
 void mergeSortPairsDeque(std::deque<std::pair<long, long> >& arr, size_t left, size_t right)
 {
-    if (left + 1 >= right) return;
+    if (left + 1 >= right)
+        return;
     
     size_t mid = (left + right) / 2;
     mergeSortPairsDeque(arr, left, mid);
@@ -148,7 +151,8 @@ void mergeSortPairsDeque(std::deque<std::pair<long, long> >& arr, size_t left, s
     std::deque<std::pair<long, long> > temp(right - left);
     size_t i = left, j = mid, k = 0;
     
-    while (i < mid && j < right) {
+    while (i < mid && j < right)
+    {
         if (arr[i].first <= arr[j].first)
             temp[k++] = arr[i++];
         else
@@ -164,12 +168,13 @@ void mergeSortPairsDeque(std::deque<std::pair<long, long> >& arr, size_t left, s
         arr[left + i] = temp[i];
 }
 
-void Merge::VectorSort()
+void PmergeMe::VectorSort()
 {
     size_t size = Push_Swap.size();
     
     lastVector = 0;
-    for (size_t i = 0; i < size; i += 2) {
+    for (size_t i = 0; i < size; i += 2)
+    {
         long a = Push_Swap[i];
         if (i + 1 == size)
         {
@@ -208,7 +213,7 @@ void Merge::VectorSort()
         while (1)
         {
             size_t jacob = jacobsthalSequence(sequence++);
-            if (jacob > PendSize - 1)
+            if (jacob >= PendSize )
             {
                 jacobsthalVEctor.push_back(PendSize);
                 break ;
@@ -238,13 +243,14 @@ void Merge::VectorSort()
         Main.insert(pos, lastOneV);
     }
 }
-void Merge::DequeSort()
+void PmergeMe::DequeSort()
 {
 
     size_t size = dPush_Swap.size();
     
     lastDeque = 0;
-    for (size_t i = 0; i < size; i += 2) {
+    for (size_t i = 0; i < size; i += 2)
+    {
         long a = dPush_Swap[i];
         if (i + 1 == size)
         {
@@ -261,7 +267,8 @@ void Merge::DequeSort()
     size = dSorts.size();
     mergeSortPairsDeque(dSorts, 0, size);
     
-    if (dSorts.size() > 0) {
+    if (dSorts.size() > 0)
+    {
         dMain.push_back(dSorts[0].second);
         dMain.push_back(dSorts[0].first);
         for (size_t i = 1; i < size; i++) {
@@ -281,7 +288,7 @@ void Merge::DequeSort()
             while (1)
             {
                 size_t jacob = jacobsthalSequence(sequence++);
-                if (jacob > PendSize)
+                if (jacob >= PendSize)
                 {
                     jacobsthalDeque.push_back(PendSize);
                     break ;
@@ -310,7 +317,7 @@ void Merge::DequeSort()
 }
 
 
-const char *Merge::thowing::what() const throw()
+const char *PmergeMe::thowing::what() const throw()
 {
     return "Error";
 }

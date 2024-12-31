@@ -6,22 +6,22 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 09:07:47 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/12 11:53:05 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 11:48:58 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-Bitcoin::Bitcoin()
+BitcoinExchange::BitcoinExchange()
 {
 }
 
-Bitcoin::Bitcoin(Bitcoin const &B)
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &B)
 {
     *this = B;
 }
 
-Bitcoin &Bitcoin::operator=(Bitcoin const &B)
+BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &B)
 {
     if (this != &B)
     {
@@ -33,13 +33,13 @@ Bitcoin &Bitcoin::operator=(Bitcoin const &B)
     return *this;
 }
 
-Bitcoin::~Bitcoin()
+BitcoinExchange::~BitcoinExchange()
 {
 }
 
-void Bitcoin::Exchange(const std::string input)
+void BitcoinExchange::Exchange(const std::string input)
 {
-    std::fstream    File(input, std::ios::in);
+    std::fstream File(input.c_str(), std::ios::in);
     std::string     line;
     if (!File.is_open())
     {
@@ -62,13 +62,13 @@ void Bitcoin::Exchange(const std::string input)
             {
                 ParsingInput(line);
 
-                std::map<std::string, double>::iterator it = Data.find(TimeZone.substr(0, 10));
-                if (it != Data.end())
+
+                std::map<std::string, double>::iterator it = Data.lower_bound(TimeZone.substr(0, 10));
+                if (it != Data.end() && it->first == TimeZone.substr(0, 10))
                     std::cout << TimeZone << " => " << Convert << " = " << (Convert * it->second) << std::endl;
                 else
                 {
-                    it = Data.lower_bound(TimeZone.substr(0, 10));
-                    if (it->first != TimeZone.substr(0, 10) && Data.begin() != it)
+                    if ( Data.begin() != it)
                         it--;
                     if (it != Data.end())
                         std::cout << TimeZone << " => " << Convert << " = " << (Convert * it->second) << std::endl;
@@ -86,9 +86,9 @@ void Bitcoin::Exchange(const std::string input)
     }
 }
 
-void Bitcoin::ReadDataBaseFile()
+void BitcoinExchange::ReadDataBaseFile()
 {
-    std::fstream        File("data.csv", std::ios::in);
+    std::fstream        File("data.csv");
     std::string         line, read, nbr;
     char *end;
     double price;
@@ -113,17 +113,17 @@ void Bitcoin::ReadDataBaseFile()
     }
 }
 
-void Bitcoin::ParsingInput(const std::string input)
+void BitcoinExchange::ParsingInput(const std::string input)
 {
     std::string first_line, last_line;
     
     size_t pos = input.find("|");
     if (pos == std::string::npos)
        throw( "Error: bad input => " + input);
-    first_line = input.substr(0, 10);
+    first_line = input.substr(0, pos);
     last_line = input.substr(pos + 1);
-    ParsingDate(first_line);
-    ParsingValue(last_line);
+    ParsingDate(first_line, input);
+    ParsingValue(last_line, input);
 }
 bool syn_tax(std::string &input)
 {
@@ -147,27 +147,27 @@ bool syn_tax(std::string &input)
     return false;
 }
 
-void Bitcoin::ParsingDate(std::string input)
+void BitcoinExchange::ParsingDate(std::string input, const std::string original)
 {
     int year, month, day;
     bool sana_kabisa = 0;
     lower = false;
-
-    if (input.length() < 10 || syn_tax(input))
-        throw( "Error: bad input => " + input);
+    if (input.length() != 11 || syn_tax(input))
+        throw( "Error: bad input => " + original);
+    input = input.substr(0, 10);
     TimeZone = input;
     year = std::atoi(input.substr(0, 4).c_str());
     month = std::atoi(input.substr(5, 2).c_str());
     day = std::atoi(input.substr(8, 2).c_str());
     sana_kabisa = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    if (year < 2009)
-        lower = true;
+    // if (year < 2009)
+    //     lower = true;
     if ((month < 1 || month > 12) || (day < 1 || day > 31))
-        throw( "Error: bad input => " + input);
-    if (month == 2 && (!sana_kabisa && day > 28))
-        throw( "Error: bad input => " + input);
+        throw( "Error: bad input => " + original);
+    if (month == 2 && ((!sana_kabisa && day > 28) || (sana_kabisa && day > 29)))
+        throw( "Error: bad input => " + original);
     if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
-        throw( "Error: bad input => " + input);
+        throw( "Error: bad input => " + original);
     
 }
 
@@ -203,22 +203,33 @@ int count(std::string const &Value, char c)
     return count;
 }
 
-void Bitcoin::ParsingValue(std::string Value)
+void BitcoinExchange::ParsingValue(std::string Value, const std::string original)
 {
     char *end = NULL;
-    if (Value.find_first_not_of("0123456789-+. ") != std::string::npos)
+    if (Value[0] != ' ')
         throw( "Error: bad input => " + Value);
-    while (Value.size() > 0 && std::iswspace(Value[0]))
-       Value = Value.c_str() + 1;
+    Value = Value.substr(1);
+    std::string x = "0123456789-+";
+    if (x.find(Value[0]) == std::string::npos)
+        throw( "Error: bad input => " + original);
+    if (Value.find_first_not_of("0123456789-+.") != std::string::npos)
+        throw( "Error: bad input => " + original);
+    if ((Value[0] == '+' || Value[0] == '-') && !std::isdigit(Value[1]))
+        throw( "Error: bad input => " + original);
+// Value = Value.substr(i);q
+    // if (Value[0] == '\0')
+    //     throw( "Error: bad input => " + Value);
     if (!find_percentage(Value))
-        throw( "Error: bad input => " + Value);
-    if (count(Value, '+') > 1 || count(Value, '-') > 1)
-        throw( "Error: bad input => " + Value);
+        throw( "Error: bad input => " + original);
+    // if (count(Value, '+') > 1 || count(Value, '-') > 1) 
+    //     throw( "Error: bad input => " + original);
     Convert = std::strtod(Value.c_str(), &end);
+    if (Convert == -0)
+        Convert = 0;
     if (*end != 0)
-        throw( "Error: bad input => " + Value);
-    if (Convert < double(0))
+        throw( "Error: bad input => " + original);
+    if (Convert < (double)(0))
         throw( "Error: not a positive number.");
-    if (Convert > double(1000))
+    if (Convert > (double)(1000))
         throw( "Error: too large a number.");
 }

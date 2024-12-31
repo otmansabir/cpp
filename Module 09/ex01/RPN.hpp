@@ -5,15 +5,15 @@
 # include <sstream>
 #include <cstdlib>
 
-class Polish
+class RPN
 {
     private:
         std::stack<int>         Math;
     public:
-        Polish();
-        Polish(Polish const &P);
-        Polish &operator=(Polish const &P);
-        ~Polish();
+        RPN();
+        RPN(RPN const &P);
+        RPN &operator=(RPN const &P);
+        ~RPN();
 
         void start_calculation(std::string input);
         bool Parsing(std::string input);

@@ -12,7 +12,7 @@
 
 CC 			= c++ 
 
-FLAGS		= -std=c++98 -Wall -Werror -Wextra
+FLAGS		= -std=c++98 -Wall -Werror -Wextra 
 
 SRC			=  main.cpp BitcoinExchange.cpp
 

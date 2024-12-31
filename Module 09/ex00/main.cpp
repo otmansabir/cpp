@@ -6,7 +6,7 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 07:58:17 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/11 12:09:42 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 09:51:29 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int ac, char **av)
 {
-    Bitcoin btc;
+    BitcoinExchange btc;
     if (ac != 2)
         return std::cerr << "Error: Bad argument." << std::endl, 1;
     btc.ReadDataBaseFile();

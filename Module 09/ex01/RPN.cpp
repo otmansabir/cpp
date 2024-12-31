@@ -6,33 +6,33 @@
 /*   By: osabir <osabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 02:26:02 by osabir            #+#    #+#             */
-/*   Updated: 2024/11/10 10:57:51 by osabir           ###   ########.fr       */
+/*   Updated: 2024/12/28 11:49:20 by osabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-Polish::Polish()
+RPN::RPN()
 {
 }
 
-Polish::Polish(Polish const &P)
+RPN::RPN(RPN const &P)
 {
     *this = P;
 }
 
-Polish &Polish::operator=(Polish const &P)
+RPN &RPN::operator=(RPN const &P)
 {
     if (this != &P)
         this->Math = P.Math;
     return *this;
 }
 
-Polish::~Polish()
+RPN::~RPN()
 {
 }
 
-void Polish::start_calculation(std::string input)
+void RPN::start_calculation(std::string input)
 {
     if (Parsing(input))
     {
@@ -41,7 +41,7 @@ void Polish::start_calculation(std::string input)
     }
 }
 
-bool Polish::Parsing(std::string input)
+bool RPN::Parsing(std::string input)
 {
     if (input.find_first_not_of("0123456789/*-+ ") != std::string::npos)
         return std::cerr << "Error" << std::endl, 0;
@@ -49,7 +49,7 @@ bool Polish::Parsing(std::string input)
     return OneWayParsing(input);
 }
 
-int Polish::Calculation(int a, int b, std::string opr)
+int RPN::Calculation(int a, int b, std::string opr)
 {
     int final = 0;
     char op = opr[0];
@@ -77,7 +77,7 @@ int Polish::Calculation(int a, int b, std::string opr)
     return final;
 }
 
-bool Polish::OneWayParsing(std::string input)
+bool RPN::OneWayParsing(std::string input)
 {
     std::stringstream   tokens(input);
     std::string         line;
@@ -86,9 +86,10 @@ bool Polish::OneWayParsing(std::string input)
     {
         if (line.find_first_of("-/*+") == std::string::npos)
         {
-            int i = std::atoi(line.c_str());
-            if (i < 10)
-                Math.push(i);
+            if(line.size() == 1)
+            {
+                    Math.push(int(line[0] - '0'));
+            }
             else
                 return std::cout << "Error" << std::endl , 0;
         }
