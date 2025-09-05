@@ -16,8 +16,8 @@ Each directory corresponds to one module and typically contains several exercise
 - [Module 02](Module%2002)
 - [Module 03](Module%2003)
 - [Module 04](Module%2004)
-- [module 05](module%2005)  ← note the lowercase naming in this repo
-- [module 06](module%2006)  ← note the lowercase naming in this repo
+- [module 05](module%2005)
+- [module 06](module%2006)
 - [Module 07](Module%2007)
 - [Module 08](Module%2008)
 - [Module 09](Module%2009)
